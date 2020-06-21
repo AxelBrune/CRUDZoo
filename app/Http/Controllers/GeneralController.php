@@ -15,18 +15,6 @@ class GeneralController extends Controller
      */
     public function index()
     {
-        // $oiseaux = Oiseau::all('name');
-        // $mammiferes = Mammifere::all('name');
-        // $reptiles = Reptile::all('name');
-
-        //  $allanimals = array(
-        //      $oiseaux,
-        //      $mammiferes,
-        //      $reptiles
-        //  );
-
-
-        // return response()->json($allanimals, 200);
 
         $animals = Animal::all();
 
@@ -51,7 +39,10 @@ class GeneralController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $animal = Animal::create($request->all());
+        if ($animal){
+            return $this->refresh();
+        }
     }
 
     /**
@@ -97,5 +88,10 @@ class GeneralController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function refresh() {
+        $allAnimals = Animal::all();
+        return response()->json($allAnimals, 200);
     }
 }

@@ -17,4 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/animalsList/', 'Generalcontroller@index');
+Route::get('/animalsList', 'Generalcontroller@index');
+Route::post('/animalsList', 'Generalcontroller@store');

@@ -16,9 +16,10 @@ class CreateAnimalsTable extends Migration
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('types');
-            $table->string('color');
+            $table->string('type');
+            $table->string('fur')->default(null);
+            $table->string('feathers')->default(null);
+            $table->string('scale')->default(null);
             $table->timestamps();
         });
     }
