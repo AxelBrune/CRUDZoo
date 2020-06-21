@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOiseausTable extends Migration
+class CreateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateOiseausTable extends Migration
      */
     public function up()
     {
-        Schema::create('oiseaus', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+        Schema::create('types', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('type_name');
+            $table->string('fur');
             $table->string('feathers');
+            $table->string('scale');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateOiseausTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oiseaus');
+        Schema::dropIfExists('types');
     }
 }

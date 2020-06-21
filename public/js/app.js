@@ -1914,7 +1914,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      animals: {}
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('http://crudapp.test:81/animalsList').then(function (response) {
+      _this.animals = response; //  console.log(response)
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  },
   mounted: function mounted() {
     console.log('GeneralComponent mounted.');
   }
@@ -37488,15 +37525,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("h1", [_vm._v("Liste de tous les animaux")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm._l(_vm.animals.data, function(animal) {
+        return _c("ul", { staticClass: "list-group" }, [
+          _c(
+            "li",
+            {
+              key: animal.id,
+              staticClass:
+                "list-group-item d-flex justify-content-between align-items-center bg-secondary"
+            },
+            [
+              _c("p", [_vm._v(_vm._s(animal.name))]),
+              _vm._v(" "),
+              _vm._m(0, true)
+            ]
+          )
+        ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Liste de tous les animaux")])
+    return _c("div", [
+      _c(
+        "button",
+        { staticClass: "btn btn-warning", attrs: { type: "button" } },
+        [_vm._v("\n                        Éditer\n                    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        [_vm._v("Supprimer")]
+      )
     ])
   }
 ]
