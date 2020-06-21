@@ -25,6 +25,7 @@ Vue.use(VueRouter);
 import Home from "./components/HomeComponent.vue";
 import General from './components/GeneralComponent.vue';
 Vue.component("add-animal", require("./components/AddAnimalComponent.vue").default);
+Vue.component("edit-animal", require("./components/EditAnimalComponent.vue").default);
 const routes = [
     {
         path: '/',

@@ -17,5 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/animalsList', 'Generalcontroller@index');
+Route::get('/animalsList/{q?}', 'Generalcontroller@index');
 Route::post('/animalsList', 'Generalcontroller@store');
+Route::get('/animal/edit/{id}', 'Generalcontroller@edit');
+Route::delete('/animal/{id}', 'Generalcontroller@destroy');

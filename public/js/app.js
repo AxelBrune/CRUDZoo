@@ -2005,10 +2005,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GeneralComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GeneralComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditAnimalComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditAnimalComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2043,10 +2043,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['animalToEdit'],
+  methods: {//update() {
+    //     axios.patch("http://crudapp.test:81/tasks/edit/"+this.taskToEdit.id, {
+    //         name: this.taskToEdit.name
+    //     })
+    //     .then(response => this.$emit('task-updated', response))
+    //     .catch(err => console.log(err));
+    // }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GeneralComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GeneralComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      animals: {}
+      animals: {},
+      animalToEdit: "",
+      attribute: "",
+      q: ""
     };
   },
   created: function created() {
@@ -2064,6 +2128,41 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     refresh: function refresh(animals) {
       this.animals = animals;
+    },
+    getAnimal: function getAnimal(id) {
+      var _this2 = this;
+
+      axios.get("http://crudapp.test:81/animal/edit/" + id).then(function (response) {
+        return _this2.animalToEdit = response.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    deleteAnimal: function deleteAnimal(id) {
+      var _this3 = this;
+
+      axios["delete"]("http://crudapp.test:81/animal/" + id).then(function (response) {
+        return _this3.animals = response;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    search: function search() {
+      var _this4 = this;
+
+      if (this.q.length > 2) {
+        axios.get('http://crudapp.test:81/animalsList/' + this.q).then(function (response) {
+          return _this4.animals = response;
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      } else {
+        axios.get('http://crudapp.test:81/animalsList').then(function (response) {
+          return _this4.animals = response;
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
     }
   }
 });
@@ -37827,6 +37926,208 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditAnimalComponent.vue?vue&type=template&id=030be95c&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditAnimalComponent.vue?vue&type=template&id=030be95c& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "editModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Nom de l'animal : ")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.animalToEdit.name,
+                        expression: "animalToEdit.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name" },
+                    domProps: { value: _vm.animalToEdit.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.animalToEdit, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Type de l'animal : ")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.animalToEdit.type,
+                          expression: "animalToEdit.type"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.animalToEdit,
+                            "type",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", [_vm._v("Reptile")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("Mammifère")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("Oiseau")])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [
+                    _vm._v(
+                      "Comment décrire son attribut (écailles pour un reptiles, fourrure pour un mammifère ou plumes pour un oiseau)"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.animalToEdit.fur,
+                        expression: "animalToEdit.fur"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "attribute" },
+                    domProps: { value: _vm.animalToEdit.fur },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.animalToEdit, "fur", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Modification d'un animal")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { type: "submit", "data-dismiss": "modal" }
+        },
+        [_vm._v("Enregistrer")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GeneralComponent.vue?vue&type=template&id=3f1cc8e0&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GeneralComponent.vue?vue&type=template&id=3f1cc8e0& ***!
@@ -37850,49 +38151,100 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "col-row" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.q,
+                expression: "q"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Rechercher un animal" },
+            domProps: { value: _vm.q },
+            on: {
+              keyup: _vm.search,
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.q = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
       _c("add-animal", { on: { "animal-added": _vm.refresh } }),
       _vm._v(" "),
       _vm._l(_vm.animals.data, function(animal) {
-        return _c("ul", { staticClass: "list-group" }, [
-          _c(
-            "li",
-            {
-              key: animal.id,
-              staticClass:
-                "list-group-item d-flex justify-content-between align-items-center"
-            },
-            [
-              _c("p", [_vm._v(_vm._s(animal.name))]),
-              _vm._v(" "),
-              _vm._m(0, true)
-            ]
-          )
-        ])
+        return _c(
+          "ul",
+          { staticClass: "list-group" },
+          [
+            _c(
+              "li",
+              {
+                key: animal.id,
+                staticClass:
+                  "list-group-item d-flex justify-content-between align-items-center"
+              },
+              [
+                _c("p", [_vm._v(_vm._s(animal.name))]),
+                _vm._v(" "),
+                _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#editModal"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.getAnimal(animal.id)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Éditer\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteAnimal(animal.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Supprimer")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("edit-animal", { attrs: { animalToEdit: _vm.animalToEdit } })
+          ],
+          1
+        )
       })
     ],
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        { staticClass: "btn btn-warning", attrs: { type: "button" } },
-        [_vm._v("\n                        Éditer\n                    ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v("Supprimer")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -53159,6 +53511,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 Vue.component("add-animal", __webpack_require__(/*! ./components/AddAnimalComponent.vue */ "./resources/js/components/AddAnimalComponent.vue")["default"]);
+Vue.component("edit-animal", __webpack_require__(/*! ./components/EditAnimalComponent.vue */ "./resources/js/components/EditAnimalComponent.vue")["default"]);
 var routes = [{
   path: '/',
   component: _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -53291,6 +53644,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnimalComponent_vue_vue_type_template_id_acfac5aa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnimalComponent_vue_vue_type_template_id_acfac5aa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditAnimalComponent.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/EditAnimalComponent.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditAnimalComponent_vue_vue_type_template_id_030be95c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditAnimalComponent.vue?vue&type=template&id=030be95c& */ "./resources/js/components/EditAnimalComponent.vue?vue&type=template&id=030be95c&");
+/* harmony import */ var _EditAnimalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditAnimalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditAnimalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditAnimalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditAnimalComponent_vue_vue_type_template_id_030be95c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditAnimalComponent_vue_vue_type_template_id_030be95c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditAnimalComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditAnimalComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/EditAnimalComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditAnimalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditAnimalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditAnimalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditAnimalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditAnimalComponent.vue?vue&type=template&id=030be95c&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/EditAnimalComponent.vue?vue&type=template&id=030be95c& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditAnimalComponent_vue_vue_type_template_id_030be95c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditAnimalComponent.vue?vue&type=template&id=030be95c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditAnimalComponent.vue?vue&type=template&id=030be95c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditAnimalComponent_vue_vue_type_template_id_030be95c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditAnimalComponent_vue_vue_type_template_id_030be95c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

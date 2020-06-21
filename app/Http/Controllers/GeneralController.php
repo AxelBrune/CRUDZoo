@@ -16,9 +16,13 @@ class GeneralController extends Controller
     public function index()
     {
 
-        $animals = Animal::all();
-
-        return response()->json($animals, 200);
+        if(request('q') !== null){
+            $animals = Animal::where('name', 'like', '%'.request('q').'%')->get();
+            return response()->json($animals);
+        }
+        else{
+            return $this->refresh();
+        }
     }
 
     /**
@@ -64,7 +68,8 @@ class GeneralController extends Controller
      */
     public function edit($id)
     {
-        //
+        $animal = Animal::find($id);
+        return response()->json($animal);
     }
 
     /**
@@ -87,7 +92,13 @@ class GeneralController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $animal = Animal::find($id);
+        if($animal -> delete()){
+            return $this->refresh();
+        }
+        else{
+            return response()->json(['error' => 'Destroy method has failed'],425);
+        }
     }
 
     private function refresh() {
