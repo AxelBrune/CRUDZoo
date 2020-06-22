@@ -10,6 +10,7 @@
 ## About the project  
 
 This project is my first CRUD App in Laravel and VueJs. It has been created for people who could want to make a list of the animals they know/ they have met.
+To launch the projet : open cmd in the CRUDZoo folder, enter the command "php artisan migrate:refresh --seed" and then enter the command "npm run dev"
 
 ## About Laravel
 
