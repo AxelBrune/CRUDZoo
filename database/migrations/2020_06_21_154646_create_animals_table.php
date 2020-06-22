@@ -17,9 +17,9 @@ class CreateAnimalsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
-            $table->string('fur')->default(null);
-            $table->string('feathers')->default(null);
-            $table->string('scale')->default(null);
+            $table->string('fur')->nullable();
+            $table->string('feathers')->nullable();
+            $table->string('scale')->nullable();
             $table->string('color');
             $table->timestamps();
         });

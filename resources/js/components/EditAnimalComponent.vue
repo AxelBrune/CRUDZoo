@@ -51,7 +51,7 @@
 
 <script>
     export default {
-        props: ['animalToEdit'],
+        props: ['animalToEdit'], 
         data(){
             return{
                 couleur_reptile: "table-success",
