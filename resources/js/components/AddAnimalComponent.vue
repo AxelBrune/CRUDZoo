@@ -70,7 +70,7 @@
         methods: {
              storeAnimal() {
                  if(this.type === "Reptile"){
-                    axios.post('http://crudapp.test:81/animalsList', {
+                    axios.post('/animalsList', {
                        name: this.name,
                        type: this.type,
                        scale: this.attribute,
@@ -80,7 +80,7 @@
                    .catch(err => console.log(err));
                  }
                  else if (this.type === "Mammifère"){
-                     axios.post('http://crudapp.test:81/animalsList', {
+                     axios.post('/animalsList', {
                        name: this.name,
                        type: this.type,
                        fur: this.attribute,
@@ -90,7 +90,7 @@
                    .catch(err => console.log(err));
                  }
                  else{
-                     axios.post('http://crudapp.test:81/animalsList', {
+                     axios.post('/animalsList', {
                        name: this.name,
                        type: this.type,
                        feathers: this.attribute,

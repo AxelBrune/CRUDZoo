@@ -1980,7 +1980,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.type === "Reptile") {
-        axios.post('http://crudapp.test:81/animalsList', {
+        axios.post('/animalsList', {
           name: this.name,
           type: this.type,
           scale: this.attribute,
@@ -1991,7 +1991,7 @@ __webpack_require__.r(__webpack_exports__);
           return console.log(err);
         });
       } else if (this.type === "Mammifère") {
-        axios.post('http://crudapp.test:81/animalsList', {
+        axios.post('/animalsList', {
           name: this.name,
           type: this.type,
           fur: this.attribute,
@@ -2002,7 +2002,7 @@ __webpack_require__.r(__webpack_exports__);
           return console.log(err);
         });
       } else {
-        axios.post('http://crudapp.test:81/animalsList', {
+        axios.post('/animalsList', {
           name: this.name,
           type: this.type,
           feathers: this.attribute,
@@ -2096,7 +2096,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       if (this.animalToEdit.type == "Reptile") {
-        axios.patch("http://crudapp.test:81/animal/edit/" + this.animalToEdit.id, {
+        axios.patch("/animal/edit/" + this.animalToEdit.id, {
           name: this.animalToEdit.name,
           type: this.animalToEdit.type,
           color: this.couleur_reptile,
@@ -2109,7 +2109,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return console.log(err);
         });
       } else if (this.animalToEdit.type == "Mammifère") {
-        axios.patch("http://crudapp.test:81/animal/edit/" + this.animalToEdit.id, _defineProperty({
+        axios.patch("/animal/edit/" + this.animalToEdit.id, _defineProperty({
           name: this.animalToEdit.name,
           type: this.animalToEdit.type,
           color: this.couleur_mammifere,
@@ -2121,7 +2121,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return console.log(err);
         });
       } else {
-        axios.patch("http://crudapp.test:81/animal/edit/" + this.animalToEdit.id, {
+        axios.patch("/animal/edit/" + this.animalToEdit.id, {
           name: this.animalToEdit.name,
           type: this.animalToEdit.type,
           color: this.couleur_oiseau,
@@ -2197,7 +2197,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('http://crudapp.test:81/animalsList').then(function (response) {
+    axios.get('/animalsList').then(function (response) {
       _this.animals = response;
     })["catch"](function (error) {
       return console.log(error);
@@ -2213,7 +2213,7 @@ __webpack_require__.r(__webpack_exports__);
     getAnimal: function getAnimal(id) {
       var _this2 = this;
 
-      axios.get("http://crudapp.test:81/animal/edit/" + id).then(function (response) {
+      axios.get("/animal/edit/" + id).then(function (response) {
         return _this2.animalToEdit = response.data;
       })["catch"](function (err) {
         return console.log(err);
@@ -2222,7 +2222,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteAnimal: function deleteAnimal(id) {
       var _this3 = this;
 
-      axios["delete"]("http://crudapp.test:81/animal/" + id).then(function (response) {
+      axios["delete"]("/animal/" + id).then(function (response) {
         return _this3.animals = response;
       })["catch"](function (err) {
         return console.log(err);
@@ -2232,13 +2232,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       if (this.q.length > 1) {
-        axios.get('http://crudapp.test:81/animalsList/' + this.q).then(function (response) {
+        axios.get('/animalsList/' + this.q).then(function (response) {
           return _this4.animals = response;
         })["catch"](function (err) {
           return console.log(err);
         });
       } else {
-        axios.get('http://crudapp.test:81/animalsList').then(function (response) {
+        axios.get('/animalsList').then(function (response) {
           return _this4.animals = response;
         })["catch"](function (err) {
           return console.log(err);

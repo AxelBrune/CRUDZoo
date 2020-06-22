@@ -63,7 +63,7 @@
         methods: {
             update(){             
                  if(this.animalToEdit.type == "Reptile"){
-                     axios.patch("http://crudapp.test:81/animal/edit/"+this.animalToEdit.id, {
+                     axios.patch("/animal/edit/"+this.animalToEdit.id, {
                          name: this.animalToEdit.name,
                          type: this.animalToEdit.type,
                          color: this.couleur_reptile,
@@ -75,7 +75,7 @@
                      .catch(err => console.log(err));
                   }
                   else if (this.animalToEdit.type == "Mammifère"){
-                      axios.patch("http://crudapp.test:81/animal/edit/"+this.animalToEdit.id, {
+                      axios.patch("/animal/edit/"+this.animalToEdit.id, {
                          name: this.animalToEdit.name,
                          type: this.animalToEdit.type,
                          color: this.couleur_mammifere,
@@ -87,7 +87,7 @@
                      .catch(err => console.log(err));
                   }
                   else{
-                      axios.patch("http://crudapp.test:81/animal/edit/"+this.animalToEdit.id, {
+                      axios.patch("/animal/edit/"+this.animalToEdit.id, {
                          name: this.animalToEdit.name,
                          type: this.animalToEdit.type,
                          color: this.couleur_oiseau,

@@ -41,39 +41,39 @@
             return{
                 animals: {},
                 animalToEdit: "",
-                q: ""
+                q: "",
             }
         },
         created(){
-            axios.get('http://crudapp.test:81/animalsList')
+            axios.get('/animalsList')
             .then(response => {this.animals = response})
             .catch(error => console.log(error));
         },
         mounted() {
-            console.log('GeneralComponent mounted.')
+            console.log('GeneralComponent mounted.');
         },
         methods: {
             refresh(animals){
                 this.animals=animals;
             },
             getAnimal(id){
-                axios.get("http://crudapp.test:81/animal/edit/"+id)
+                axios.get("/animal/edit/"+id)
                 .then(response => this.animalToEdit = response.data)
                 .catch(err => console.log(err));
             },
             deleteAnimal(id){
-                axios.delete("http://crudapp.test:81/animal/"+id)
+                axios.delete("/animal/"+id)
                 .then(response => this.animals = response)
                 .catch(err => console.log(err));
             },
             search(){
                 if(this.q.length > 1){
-                    axios.get('http://crudapp.test:81/animalsList/'+this.q)
+                    axios.get('/animalsList/'+this.q)
                     .then(response => this.animals = response)
                     .catch(err => console.log(err));
                 }
                 else{
-                    axios.get('http://crudapp.test:81/animalsList')
+                    axios.get('/animalsList')
                     .then(response => this.animals = response)
                     .catch(err => console.log(err));
                 }
