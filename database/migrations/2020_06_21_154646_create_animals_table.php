@@ -20,6 +20,7 @@ class CreateAnimalsTable extends Migration
             $table->string('fur')->default(null);
             $table->string('feathers')->default(null);
             $table->string('scale')->default(null);
+            $table->string('color');
             $table->timestamps();
         });
     }

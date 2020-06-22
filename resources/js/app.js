@@ -5,10 +5,11 @@
  */
 
 require('./bootstrap');
-
+import {Plugin} from 'vue-fragment';
 window.Vue = require('vue');
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
+Vue.use(Plugin);
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,17 +23,14 @@ Vue.use(VueRouter);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-import Home from "./components/HomeComponent.vue";
 import General from './components/GeneralComponent.vue';
 Vue.component("add-animal", require("./components/AddAnimalComponent.vue").default);
 Vue.component("edit-animal", require("./components/EditAnimalComponent.vue").default);
+
+
 const routes = [
     {
         path: '/',
-        component: Home
-    },
-    {
-        path: "/all",
         component: General
     }
 ]

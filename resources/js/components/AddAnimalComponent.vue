@@ -25,13 +25,21 @@
                     <div class="form-group">
                         <label>Type de l'animal : </label>
                         <select class="form-control" v-model="type">
-                            <option>Reptile</option>
-                            <option>Mammifère</option>
-                            <option>Oiseau</option>
+                            <option style="background-color: #c7eed8">Reptile</option>
+                            <option style="background-color: #c6e0f5">Mammifère</option>
+                            <option style="background-color: #f7c6c5">Oiseau</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Comment décrire son attribut (écailles pour un reptiles, fourrure pour un mammifère ou plumes pour un oiseau)</label>
+                    <div class="form-group" v-if="type === 'Reptile'">
+                        <label>Ses écailles sont : </label>
+                        <input type="text" id="attribute" class="form-control" v-model="attribute"/>
+                    </div>
+                    <div class="form-group" v-if="type === 'Mammifère'">
+                        <label>Son pelage est : </label>
+                        <input type="text" id="attribute" class="form-control" v-model="attribute"/>
+                    </div>
+                    <div class="form-group" v-if="type === 'Oiseau'">
+                        <label>Ses plumes sont : </label>
                         <input type="text" id="attribute" class="form-control" v-model="attribute"/>
                     </div>
                 </form>
@@ -52,7 +60,10 @@
             return{
                 name: "",
                 attribute: "",
-                type: ""
+                type: "",
+                couleur_reptile: "table-success",
+                couleur_mammifere: "table-primary",
+                couleur_oiseau: "table-danger"
             }
         },
 
@@ -62,7 +73,8 @@
                     axios.post('http://crudapp.test:81/animalsList', {
                        name: this.name,
                        type: this.type,
-                       scale: this.attribute
+                       scale: this.attribute,
+                       color: this.couleur_reptile
                    })
                    .then(response => this.$emit('animal-added', response))
                    .catch(err => console.log(err));
@@ -71,7 +83,8 @@
                      axios.post('http://crudapp.test:81/animalsList', {
                        name: this.name,
                        type: this.type,
-                       fur: this.attribute
+                       fur: this.attribute,
+                       color: this.couleur_mammifere
                    })
                    .then(response => this.$emit('animal-added', response))
                    .catch(err => console.log(err));
@@ -80,7 +93,8 @@
                      axios.post('http://crudapp.test:81/animalsList', {
                        name: this.name,
                        type: this.type,
-                       feathers: this.attribute
+                       feathers: this.attribute,
+                       color: this.couleur_oiseau
                    })
                    .then(response => this.$emit('animal-added', response))
                    .catch(err => console.log(err));

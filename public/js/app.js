@@ -1956,12 +1956,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       name: "",
       attribute: "",
-      type: ""
+      type: "",
+      couleur_reptile: "table-success",
+      couleur_mammifere: "table-primary",
+      couleur_oiseau: "table-danger"
     };
   },
   methods: {
@@ -1972,7 +1983,8 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('http://crudapp.test:81/animalsList', {
           name: this.name,
           type: this.type,
-          scale: this.attribute
+          scale: this.attribute,
+          color: this.couleur_reptile
         }).then(function (response) {
           return _this.$emit('animal-added', response);
         })["catch"](function (err) {
@@ -1982,7 +1994,8 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('http://crudapp.test:81/animalsList', {
           name: this.name,
           type: this.type,
-          fur: this.attribute
+          fur: this.attribute,
+          color: this.couleur_mammifere
         }).then(function (response) {
           return _this.$emit('animal-added', response);
         })["catch"](function (err) {
@@ -1992,7 +2005,8 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('http://crudapp.test:81/animalsList', {
           name: this.name,
           type: this.type,
-          feathers: this.attribute
+          feathers: this.attribute,
+          color: this.couleur_oiseau
         }).then(function (response) {
           return _this.$emit('animal-added', response);
         })["catch"](function (err) {
@@ -2014,6 +2028,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2059,13 +2083,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['animalToEdit'],
-  methods: {//update() {
-    //     axios.patch("http://crudapp.test:81/tasks/edit/"+this.taskToEdit.id, {
-    //         name: this.taskToEdit.name
-    //     })
-    //     .then(response => this.$emit('task-updated', response))
-    //     .catch(err => console.log(err));
-    // }
+  data: function data() {
+    return {
+      couleur_reptile: "table-success",
+      couleur_mammifere: "table-primary",
+      couleur_oiseau: "table-danger",
+      attribut: ""
+    };
+  },
+  methods: {
+    update: function update() {
+      var _this = this;
+
+      if (this.animalToEdit.type == "Reptile") {
+        axios.patch("http://crudapp.test:81/animal/edit/" + this.animalToEdit.id, {
+          name: this.animalToEdit.name,
+          type: this.animalToEdit.type,
+          color: this.couleur_reptile,
+          scale: this.animalToEdit.scale,
+          fur: null,
+          feathers: null
+        }).then(function (response) {
+          return _this.$emit('animal-updated', response);
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      } else if (this.animalToEdit.type == "Mammifère") {
+        axios.patch("http://crudapp.test:81/animal/edit/" + this.animalToEdit.id, _defineProperty({
+          name: this.animalToEdit.name,
+          type: this.animalToEdit.type,
+          color: this.couleur_mammifere,
+          fur: this.animalToEdit.fur,
+          scale: null
+        }, "scale", null)).then(function (response) {
+          return _this.$emit('animal-updated', response);
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      } else {
+        axios.patch("http://crudapp.test:81/animal/edit/" + this.animalToEdit.id, {
+          name: this.animalToEdit.name,
+          type: this.animalToEdit.type,
+          color: this.couleur_oiseau,
+          feathers: this.animalToEdit.feathers,
+          fur: null,
+          scale: null
+        }).then(function (response) {
+          return _this.$emit('animal-updated', response);
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
+    }
   }
 });
 
@@ -2104,12 +2173,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       animals: {},
       animalToEdit: "",
-      attribute: "",
       q: ""
     };
   },
@@ -2117,7 +2198,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('http://crudapp.test:81/animalsList').then(function (response) {
-      _this.animals = response; //  console.log(response)
+      _this.animals = response;
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -2150,7 +2231,7 @@ __webpack_require__.r(__webpack_exports__);
     search: function search() {
       var _this4 = this;
 
-      if (this.q.length > 2) {
+      if (this.q.length > 1) {
         axios.get('http://crudapp.test:81/animalsList/' + this.q).then(function (response) {
           return _this4.animals = response;
         })["catch"](function (err) {
@@ -2164,29 +2245,6 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('HomeComponent mounted.');
   }
 });
 
@@ -37720,6 +37778,23 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-fragment/dist/vue-fragment.esm.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vue-fragment/dist/vue-fragment.esm.js ***!
+  \************************************************************/
+/*! exports provided: default, Fragment, SSR, Plugin */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Fragment", function() { return Fragment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SSR", function() { return SSR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Plugin", function() { return Plugin; });
+function _defineProperty(e,n,t){return n in e?Object.defineProperty(e,n,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[n]=t,e}function _objectSpread(e){for(var n=1;n<arguments.length;n++){var t=null!=arguments[n]?arguments[n]:{},r=Object.keys(t);"function"==typeof Object.getOwnPropertySymbols&&(r=r.concat(Object.getOwnPropertySymbols(t).filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.forEach(function(n){_defineProperty(e,n,t[n])})}return e}var freeze=function(e,n,t){Object.defineProperty(e,n,{configurable:!0,get:function(){return t},set:function(e){console.warn("tried to set frozen property ".concat(n," with ").concat(e))}})},unfreeze=function(e,n){var t=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null;Object.defineProperty(e,n,{configurable:!0,writable:!0,value:t})},component={abstract:!0,name:"Fragment",props:{name:{type:String,default:function(){return Math.floor(Date.now()*Math.random()).toString(16)}}},mounted:function(){var e=this.$el,n=e.parentNode,t=document.createComment("fragment#".concat(this.name,"#head")),r=document.createComment("fragment#".concat(this.name,"#tail"));n.insertBefore(t,e),n.insertBefore(r,e),e.appendChild=function(t){n.insertBefore(t,r),freeze(t,"parentNode",e)},e.insertBefore=function(t,r){n.insertBefore(t,r),freeze(t,"parentNode",e)},e.removeChild=function(e){n.removeChild(e),unfreeze(e,"parentNode")},Array.from(e.childNodes).forEach(function(n){return e.appendChild(n)}),n.removeChild(e),freeze(e,"parentNode",n),freeze(e,"nextSibling",r.nextSibling);var o=n.insertBefore;n.insertBefore=function(r,i){o.call(n,r,i!==e?i:t)};var i=n.removeChild;n.removeChild=function(a){if(a===e){for(;t.nextSibling!==r;)e.removeChild(t.nextSibling);n.removeChild(t),n.removeChild(r),unfreeze(e,"parentNode"),n.insertBefore=o,n.removeChild=i}else i.call(n,a)}},render:function(e){var n=this,t=this.$slots.default;return t&&t.length&&t.forEach(function(e){return e.data=_objectSpread({},e.data,{attrs:_objectSpread({fragment:n.name},(e.data||{}).attrs)})}),e("div",{attrs:{fragment:this.name}},t)}};function ssr(e,n){ true&&console.warn("v-fragment SSR is not implemented yet.")}var Fragment=component,SSR=ssr,Plugin={install:function(e){e.component("fragment",component)}},index={Fragment:component,Plugin:Plugin,SSR:ssr};/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddAnimalComponent.vue?vue&type=template&id=acfac5aa&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddAnimalComponent.vue?vue&type=template&id=acfac5aa& ***!
@@ -37826,44 +37901,110 @@ var render = function() {
                       }
                     },
                     [
-                      _c("option", [_vm._v("Reptile")]),
+                      _c(
+                        "option",
+                        { staticStyle: { "background-color": "#c7eed8" } },
+                        [_vm._v("Reptile")]
+                      ),
                       _vm._v(" "),
-                      _c("option", [_vm._v("Mammifère")]),
+                      _c(
+                        "option",
+                        { staticStyle: { "background-color": "#c6e0f5" } },
+                        [_vm._v("Mammifère")]
+                      ),
                       _vm._v(" "),
-                      _c("option", [_vm._v("Oiseau")])
+                      _c(
+                        "option",
+                        { staticStyle: { "background-color": "#f7c6c5" } },
+                        [_vm._v("Oiseau")]
+                      )
                     ]
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [
-                    _vm._v(
-                      "Comment décrire son attribut (écailles pour un reptiles, fourrure pour un mammifère ou plumes pour un oiseau)"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.attribute,
-                        expression: "attribute"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", id: "attribute" },
-                    domProps: { value: _vm.attribute },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _vm.type === "Reptile"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Ses écailles sont : ")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.attribute,
+                            expression: "attribute"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "attribute" },
+                        domProps: { value: _vm.attribute },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.attribute = $event.target.value
+                          }
                         }
-                        _vm.attribute = $event.target.value
-                      }
-                    }
-                  })
-                ])
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.type === "Mammifère"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Son pelage est : ")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.attribute,
+                            expression: "attribute"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "attribute" },
+                        domProps: { value: _vm.attribute },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.attribute = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.type === "Oiseau"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Ses plumes sont : ")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.attribute,
+                            expression: "attribute"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "attribute" },
+                        domProps: { value: _vm.attribute },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.attribute = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
@@ -38032,39 +38173,124 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [
-                    _vm._v(
-                      "Comment décrire son attribut (écailles pour un reptiles, fourrure pour un mammifère ou plumes pour un oiseau)"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.animalToEdit.fur,
-                        expression: "animalToEdit.fur"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", id: "attribute" },
-                    domProps: { value: _vm.animalToEdit.fur },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _vm.animalToEdit.type === "Reptile"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Ses écailles sont : ")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.animalToEdit.scale,
+                            expression: "animalToEdit.scale"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "attribute" },
+                        domProps: { value: _vm.animalToEdit.scale },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.animalToEdit,
+                              "scale",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(_vm.animalToEdit, "fur", $event.target.value)
-                      }
-                    }
-                  })
-                ])
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.animalToEdit.type === "Mammifère"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Son pelage est : ")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.animalToEdit.fur,
+                            expression: "animalToEdit.fur"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "attribute" },
+                        domProps: { value: _vm.animalToEdit.fur },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.animalToEdit,
+                              "fur",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.animalToEdit.type === "Oiseau"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Ses plumes sont : ")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.animalToEdit.feathers,
+                            expression: "animalToEdit.feathers"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "attribute" },
+                        domProps: { value: _vm.animalToEdit.feathers },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.animalToEdit,
+                              "feathers",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { type: "submit", "data-dismiss": "modal" },
+                  on: { click: _vm.update }
+                },
+                [_vm._v("Enregistrer")]
+              )
+            ])
           ])
         ])
       ]
@@ -38094,30 +38320,6 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success",
-          attrs: { type: "submit", "data-dismiss": "modal" }
-        },
-        [_vm._v("Enregistrer")]
       )
     ])
   }
@@ -38180,22 +38382,52 @@ var render = function() {
       _vm._v(" "),
       _c("add-animal", { on: { "animal-added": _vm.refresh } }),
       _vm._v(" "),
-      _vm._l(_vm.animals.data, function(animal) {
-        return _c(
-          "ul",
-          { staticClass: "list-group" },
-          [
-            _c(
-              "li",
-              {
-                key: animal.id,
-                staticClass:
-                  "list-group-item d-flex justify-content-between align-items-center"
-              },
+      _c("table", { staticClass: "table table-bordered" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.animals.data, function(animal) {
+            return _c(
+              "tr",
+              { class: animal.color },
               [
-                _c("p", [_vm._v(_vm._s(animal.name))]),
+                _c("td", [_vm._v(_vm._s(animal.name))]),
                 _vm._v(" "),
-                _c("div", [
+                animal.fur !== null
+                  ? _c("td", [
+                      _vm._v(
+                        "Je suis un(e) " +
+                          _vm._s(animal.name) +
+                          " et ma fourrure est " +
+                          _vm._s(animal.fur)
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                animal.feathers !== null
+                  ? _c("td", [
+                      _vm._v(
+                        "Je suis un(e) " +
+                          _vm._s(animal.name) +
+                          " et mes plumes sont " +
+                          _vm._s(animal.feathers)
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                animal.scale !== null
+                  ? _c("td", [
+                      _vm._v(
+                        "Je suis un(e) " +
+                          _vm._s(animal.name) +
+                          " et mes écailles sont " +
+                          _vm._s(animal.scale)
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-center" }, [
                   _c(
                     "button",
                     {
@@ -38213,7 +38445,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Éditer\n                    "
+                        "\n                            Éditer\n                        "
                       )
                     ]
                   ),
@@ -38231,50 +38463,44 @@ var render = function() {
                     },
                     [_vm._v("Supprimer")]
                   )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("edit-animal", { attrs: { animalToEdit: _vm.animalToEdit } })
-          ],
-          1
+                ]),
+                _vm._v(" "),
+                _c("edit-animal", {
+                  attrs: { animalToEdit: _vm.animalToEdit },
+                  on: { "animal-updated": _vm.refresh }
+                })
+              ],
+              1
+            )
+          }),
+          0
         )
-      })
+      ]),
+      _vm._v(" "),
+      _c("add-animal", { on: { "animal-added": _vm.refresh } })
     ],
-    2
+    1
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83& ***!
-  \****************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Bienvenue")])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center", attrs: { scope: "col" } }, [
+          _vm._v("Nom de l'animal")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center", attrs: { scope: "col" } }, [
+          _vm._v("Description de l'animal")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center", attrs: { scope: "col" } }, [
+          _vm._v("Actions")
+        ])
+      ])
     ])
   }
 ]
@@ -53484,8 +53710,8 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue");
+/* harmony import */ var vue_fragment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-fragment */ "./node_modules/vue-fragment/dist/vue-fragment.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_GeneralComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/GeneralComponent.vue */ "./resources/js/components/GeneralComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -53494,9 +53720,11 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.use(vue_fragment__WEBPACK_IMPORTED_MODULE_0__["Plugin"]);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -53509,17 +53737,13 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 
-
 Vue.component("add-animal", __webpack_require__(/*! ./components/AddAnimalComponent.vue */ "./resources/js/components/AddAnimalComponent.vue")["default"]);
 Vue.component("edit-animal", __webpack_require__(/*! ./components/EditAnimalComponent.vue */ "./resources/js/components/EditAnimalComponent.vue")["default"]);
 var routes = [{
   path: '/',
-  component: _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-}, {
-  path: "/all",
   component: _components_GeneralComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes
 });
 /**
@@ -53782,75 +54006,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralComponent_vue_vue_type_template_id_3f1cc8e0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralComponent_vue_vue_type_template_id_3f1cc8e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/HomeComponent.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/components/HomeComponent.vue ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomeComponent.vue?vue&type=template&id=782dcf83& */ "./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&");
-/* harmony import */ var _HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomeComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/HomeComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/HomeComponent.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./HomeComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83& ***!
-  \**********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./HomeComponent.vue?vue&type=template&id=782dcf83& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

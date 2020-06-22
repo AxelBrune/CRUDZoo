@@ -81,7 +81,18 @@ class GeneralController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $animal = Animal::find($id);
+        $animal->name = request('name');
+        $animal->type = request('type');
+        $animal->color = request('color');
+        $animal->scale = request('scale');
+        $animal->fur = request('fur');
+        $animal->feathers = request('feathers');
+
+        $animal->save();
+        if($animal){
+            return $this->refresh();
+        }
     }
 
     /**

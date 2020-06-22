@@ -20,4 +20,5 @@ Route::get('/', function () {
 Route::get('/animalsList/{q?}', 'Generalcontroller@index');
 Route::post('/animalsList', 'Generalcontroller@store');
 Route::get('/animal/edit/{id}', 'Generalcontroller@edit');
+Route::patch('/animal/edit/{id}', 'Generalcontroller@update');
 Route::delete('/animal/{id}', 'Generalcontroller@destroy');
